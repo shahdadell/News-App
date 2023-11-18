@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:news/core/network_Layer/api_manger.dart';
 import 'package:news/models/category_model.dart';
 
 class NewsDetailsView extends StatelessWidget {
@@ -8,6 +9,20 @@ class NewsDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return FutureBuilder(
+        future: ApiManager.fetchSource(categoryModel.categoryId),
+        builder: (context,snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString(),
+              ),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          return Container();
+        }
+    );
   }
 }
