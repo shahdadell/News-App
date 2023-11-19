@@ -2,33 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:news/models/source_model.dart';
 import 'package:news/pages/Home/widgets/tab_item.dart';
 
-class TabBarListView extends StatelessWidget {
+class TabBarListView extends StatefulWidget {
   SourceModel sourceModel;
-  int selectedIndex = 0;
+
    TabBarListView(this.sourceModel, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: selectedIndex,
-      length: sourceModel.sources!.length ?? 0,
-        child: Column(
-          children: [
-            TabBar(
-              isScrollable: true,
-              labelPadding: EdgeInsets.all(12),
-              onTap: (index) {
-                selectedIndex = index;
-              },
+  State<TabBarListView> createState() => _TabBarListViewState();
+}
 
-              tabs: sourceModel.sources?.map((element)
-              {
-                return TabItem(element);
-              }
-              ).toList() ?? [],
+class _TabBarListViewState extends State<TabBarListView> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DefaultTabController(
+          initialIndex: selectedIndex,
+          length: widget.sourceModel.sources!.length ?? 0,
+            child: Column(
+              children: [
+                TabBar(
+                  indicator: const BoxDecoration(),
+                  isScrollable: true,
+                  labelPadding: const EdgeInsets.all(12),
+                  onTap: (index) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+
+                  },
+
+                  tabs: widget.sourceModel.sources?.map((element)
+                  {
+                    return TabItem(
+                        element,
+                        selectedIndex == widget.sourceModel.sources?.indexOf(element));
+                  }
+                  ).toList() ?? [],
+                ),
+              ],
             ),
-          ],
         ),
+      ],
     );
   }
 }

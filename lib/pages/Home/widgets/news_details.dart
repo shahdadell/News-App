@@ -10,7 +10,7 @@ class NewsDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.fetchSource(categoryModel.categoryId),
+        future: ApiManager.fetchSources(categoryModel.categoryId),
         builder: (context,snapshot) {
           if (snapshot.hasError) {
             return Center(
