@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 class Constants {
 
   static const String baseURL ="newsapi.org";
