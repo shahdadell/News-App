@@ -5,13 +5,12 @@ import 'Category_Item.dart';
 class CustomDrawer extends StatelessWidget {
 
   final Function onCategoryClicked ;
-  Function? onPressed;
   CategoryItem? selectedCategory;
 
    CustomDrawer({
     super.key,
     required this.onCategoryClicked,
-    this.onPressed});
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              if(onPressed != null){
-                onPressed!();
-              }
+              onCategoryClicked();
             },
             child: const Padding(
               padding: EdgeInsets.all(12.0),

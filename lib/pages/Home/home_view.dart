@@ -1,15 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:news/models/category_model.dart';
 import 'package:news/pages/Home/widgets/Category_Item.dart';
 import 'package:news/pages/Home/widgets/custom_drawer.dart';
-import 'package:news/pages/Home/widgets/news_details.dart';
+
+import 'category_view.dart';
 
 class HomeView extends StatefulWidget {
 
   static const String routeName="Home";
 
-   HomeView({super.key});
+   const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -79,7 +80,6 @@ class _HomeViewState extends State<HomeView> {
         ),
         drawer: CustomDrawer(
           onCategoryClicked: onDrawerCategoryClicked,
-          onPressed: onDrawerCategoryClicked,
         ),
         body: selectedCategory == null ?
         Padding(
@@ -90,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
               Text("Pick Your Category \n of interest",
               textAlign: TextAlign.start,
               style: theme.textTheme.titleLarge?.copyWith(
-                color: Color(0xFF4F5A69),
+                color: const Color(0xFF4F5A69),
               ),
               ),
               Expanded(
@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ) :
-        NewsDetailsView(categoryModel: selectedCategory!),
+        CategoryView(categoryModel: selectedCategory!),
         ),
     );
   }
@@ -121,8 +121,10 @@ class _HomeViewState extends State<HomeView> {
   CategoryModel? selectedCategory;
 
   onCategoryItemClick(CategoryModel categoryModel){
-    print((categoryModel.categoryId),
+    if (kDebugMode) {
+      print((categoryModel.categoryId),
     );
+    }
     selectedCategory = categoryModel;
     setState(() {
     });
@@ -131,6 +133,9 @@ class _HomeViewState extends State<HomeView> {
     selectedCategory = null;
     Navigator.pop(context);
     setState(() {
+      if (kDebugMode) {
+        print("Hello");
+      }
     });
   }
 }

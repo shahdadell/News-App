@@ -15,6 +15,11 @@ class TabBarListView extends StatelessWidget {
         child: Column(
           children: [
             TabBar(
+              isScrollable: true,
+              labelPadding: EdgeInsets.all(12),
+              onTap: (index) {
+                selectedIndex = index;
+              },
 
               tabs: sourceModel.sources?.map((element)
               {
