@@ -1,10 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news/pages/Settings/settings_view.dart';
+import 'Category_Item.dart';
 
 class CustomDrawer extends StatelessWidget {
+
   final Function onCategoryClicked ;
-  const CustomDrawer({super.key, required this.onCategoryClicked});
+  Function? onPressed;
+  CategoryItem? selectedCategory;
+
+   CustomDrawer({
+    super.key,
+    required this.onCategoryClicked,
+    this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +24,14 @@ class CustomDrawer extends StatelessWidget {
       width: mediaQuery.size.width * 0.7,
       color: Colors.white,
       child:
-      Column(
-        children: [
+       Column(
+         children: [
           Container(
             alignment: Alignment.center,
             width: mediaQuery.size.width*0.7,
             height: mediaQuery.size.height*0.123,
             color: theme.primaryColor,
-            child: Text("News App!",
+            child: const Text("News App!",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
@@ -34,7 +41,9 @@ class CustomDrawer extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              onCategoryClicked();
+              if(onPressed != null){
+                onPressed!();
+              }
             },
             child: const Padding(
               padding: EdgeInsets.all(12.0),
@@ -84,3 +93,4 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 }
+

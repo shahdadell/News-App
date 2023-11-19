@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:news/models/category_model.dart';
 import 'package:news/pages/Home/widgets/Category_Item.dart';
@@ -80,6 +79,7 @@ class _HomeViewState extends State<HomeView> {
         ),
         drawer: CustomDrawer(
           onCategoryClicked: onDrawerCategoryClicked,
+          onPressed: onDrawerCategoryClicked,
         ),
         body: selectedCategory == null ?
         Padding(
@@ -125,14 +125,12 @@ class _HomeViewState extends State<HomeView> {
     );
     selectedCategory = categoryModel;
     setState(() {
-
     });
   }
   onDrawerCategoryClicked(){
     selectedCategory = null;
     Navigator.pop(context);
     setState(() {
-
     });
   }
 }

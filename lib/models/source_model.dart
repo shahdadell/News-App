@@ -3,7 +3,7 @@ class SourceModel{
   String? status ;
   String? message ;
   String? code;
-  List<Source>?sources;
+  List<Sources>?sources;
 
   SourceModel({
     this.status,
@@ -17,15 +17,14 @@ class SourceModel{
       status: json["status"],
       message: json["message"] ?? "",
       code: json["code"] ?? "",
-      sources: List<Source>.from(json["sources"].map((elements) => Source.fromJason(elements)),
-       ),
+      sources: (json["sources"] as List).map((e) => Sources.fromJason(e)).toList(),
     );
   }
 
 
   }
 
-class Source{
+class Sources{
 
   String? id;
   String? name;
@@ -33,7 +32,7 @@ class Source{
   String? url;
   String? category;
 
-  Source({
+  Sources({
     this.description,
     this.category,
     this.url,
@@ -41,8 +40,8 @@ class Source{
     this.name,
   });
 
-  factory Source.fromJason(Map < String , dynamic > json) {
-    return Source(
+  factory Sources.fromJason(Map < String , dynamic > json) {
+    return Sources(
       category: json["category"],
       description: json["description"],
       id: json["id"],
